@@ -1,4 +1,4 @@
-// Shopping Site - Clean JavaScript
+// Coupang Clone - Mobile First JavaScript v3
 document.addEventListener('DOMContentLoaded', function() {
     
     // ===== Search Form =====
@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const query = searchInput.value.trim();
             if (query) {
-                console.log('Search:', query);
+                alert('검색어: ' + query);
+            } else {
+                searchInput.focus();
             }
         });
     }
@@ -34,6 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function nextSlide() {
         const next = (currentSlide + 1) % slides.length;
         showSlide(next);
+    }
+
+    function prevSlide() {
+        const prev = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prev);
     }
 
     function startAutoRotate() {
@@ -76,19 +83,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (diff > 0) {
                     nextSlide();
                 } else {
-                    const prev = (currentSlide - 1 + slides.length) % slides.length;
-                    showSlide(prev);
+                    prevSlide();
                 }
                 stopAutoRotate();
                 startAutoRotate();
             }
         }
 
+        // Pause on hover
         bannerSlider.addEventListener('mouseenter', stopAutoRotate);
         bannerSlider.addEventListener('mouseleave', startAutoRotate);
     }
 
+    // Start auto-rotation
     startAutoRotate();
+
+    // ===== Cart & Login - No alert =====
+    // ===== Quick Menu Items - No alert =====
+    // ===== Discovery Cards & Ads - No alert on click =====
 
     // ===== Go to Top Button =====
     const goTopBtn = document.querySelector('.go-top');
@@ -103,8 +115,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (goTopBtn) {
         window.addEventListener('scroll', toggleGoTop);
+        
         goTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // ===== Footer Links - No alert =====
+
+    // ===== Image Lazy Loading =====
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        images.forEach(img => {
+            img.style.opacity = '0';
+            img.style.transition = 'opacity 0.3s ease';
+            imageObserver.observe(img);
         });
     }
 
@@ -122,27 +160,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const debouncedScroll = debounce(toggleGoTop, 100);
+    window.removeEventListener('scroll', toggleGoTop);
     window.addEventListener('scroll', debouncedScroll);
 
-    // ===== Image Lazy Loading =====
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    imageObserver.unobserve(entry.target);
-                }
-            });
-        });
-
-        images.forEach(img => {
-            img.style.opacity = '0';
-            img.style.transition = 'opacity 0.3s ease';
-            imageObserver.observe(img);
-        });
-    }
-
-    console.log('Shopping Site Loaded');
+    // ===== Console =====
+    console.log('%c🛒 Coupang Mobile Clone v3', 'color: #346aff; font-size: 20px; font-weight: bold;');
+    console.log('%c모바일 최적화 완료!', 'color: #28a745; font-size: 14px;');
 });
