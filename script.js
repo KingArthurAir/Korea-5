@@ -98,43 +98,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start auto-rotation
     startAutoRotate();
 
-    // ===== Cart & Login =====
-    const actionIcons = document.querySelectorAll('.action-icon');
-    actionIcons.forEach(icon => {
-        icon.addEventListener('click', function(e) {
-            e.preventDefault();
-            const title = this.getAttribute('title');
-            alert(title + ' 기능은 데모 버전에서 지원되지 않습니다.');
-        });
-    });
+    // ===== Cart & Login - No alert =====
 
-    // ===== Quick Menu Items =====
-    const quickItems = document.querySelectorAll('.quick-item');
-    quickItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            const text = this.querySelector('span').textContent;
-            alert(text + ' 기능은 데모 버전에서 지원되지 않습니다.');
-        });
-    });
+    // ===== Quick Menu Items - No alert =====
 
-    // ===== Discovery Cards =====
-    const discoveryCards = document.querySelectorAll('.discovery-card a');
-    discoveryCards.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('상품 상세 페이지는 데모 버전에서 지원되지 않습니다.');
-        });
-    });
-
-    // ===== Ads Items =====
-    const adsItems = document.querySelectorAll('.ads-link');
-    adsItems.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('상품 상세 페이지는 데모 버전에서 지원되지 않습니다.');
-        });
-    });
+    // ===== Discovery Cards & Ads - No alert on click =====
+    // Links now work normally (point to #)
 
     // ===== Go to Top Button =====
     const goTopBtn = document.querySelector('.go-top');
@@ -158,14 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== Footer Links =====
-    const footerLinks = document.querySelectorAll('.footer-links a, .footer-sns a, .license-link, .call-center');
-    footerLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('데모 버전에서는 지원되지 않습니다.');
-        });
-    });
+    // ===== Footer Links - No alert =====
 
     // ===== Image Lazy Loading =====
     const images = document.querySelectorAll('img[loading="lazy"]');
